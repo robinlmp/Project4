@@ -32,8 +32,10 @@ class ViewController: UIViewController, WKNavigationDelegate {
         
         let spacer = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
         let refresh = UIBarButtonItem(barButtonSystemItem: .refresh, target: webView, action: #selector(webView.reload))
+        let back = UIBarButtonItem(title: "Back", style: .plain, target: webView, action: #selector(webView.goBack))
+        let forwards = UIBarButtonItem(title: "Forward", style: .plain, target: webView, action: #selector(webView.goForward))
 
-        toolbarItems = [progressButton, spacer, refresh]
+        toolbarItems = [progressButton, spacer, refresh, back, forwards]
         navigationController?.isToolbarHidden = false
         
         let url = URL(string: "https://" + websites[0])!
@@ -47,6 +49,12 @@ class ViewController: UIViewController, WKNavigationDelegate {
         if keyPath == "estimatedProgress" {
             progressView.progress = Float(webView.estimatedProgress)
         }
+    }
+    
+    @objc func websiteNotAllowed() {
+        let ac = UIAlertController(title: "Webpage not allowed", message: "Whoops! That site isn't allowed.", preferredStyle: .alert)
+        ac.addAction(UIAlertAction(title: "Cancel", style: .default))
+        present(ac, animated: true)
     }
     
     @objc func openTapped() {
@@ -79,6 +87,7 @@ class ViewController: UIViewController, WKNavigationDelegate {
                 }
             }
         }
+        websiteNotAllowed()
         decisionHandler(.cancel)
     }
     
