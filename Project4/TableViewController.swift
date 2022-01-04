@@ -13,12 +13,6 @@ class TableViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem
         
         title = "Choose website"
         navigationController?.navigationBar.prefersLargeTitles = true
@@ -27,7 +21,6 @@ class TableViewController: UITableViewController {
     // MARK: - Table view data source
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
         return websites.count
     }
 
@@ -44,8 +37,6 @@ class TableViewController: UITableViewController {
         if let vc = storyboard?.instantiateViewController(withIdentifier: "Detail") as? ViewController {
             
             vc.website = websites[indexPath.row]
-
-            // 3: now push it onto the navigation controller
             navigationController?.pushViewController(vc, animated: true)
         }
     }
